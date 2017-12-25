@@ -9,6 +9,7 @@
 #include <unistd.h>  //close
 
 #define BUFFSIZE 50
+#define PORT 8001
 
 int main(int argc, char** argv){
     int sock_fd;
@@ -30,7 +31,7 @@ int main(int argc, char** argv){
     /*---------------------connect--------------------*/
     bzero(&server,sizeof(server));
     server.sin_family = AF_INET;
-    server.sin_port = htons(8002);
+    server.sin_port = htons(PORT);
     inet_pton(AF_INET, argv[1],&server.sin_addr);
     if(connect(sock_fd,(struct sockaddr *)&server,sizeof(server))== -1){
         perror("connect() error\n");
@@ -44,17 +45,17 @@ int main(int argc, char** argv){
 		printf("Please input the info:\n");
 		scanf("%s",wrbuf);
 		printf("success send\n");
-		/*if((memcmp("bye",wrbuf,3))== 0){
+		if((memcmp("bye",wrbuf,3))== 0){
 			write(sock_fd,wrbuf,strlen(wrbuf));
 			printf("Bye-bye then close the connect...\n");
 			break;
-		}*/
+		}
 		printf("%s\n",wrbuf);
 		write(sock_fd,wrbuf,strlen(wrbuf));
 		printf("已发送 \n");
-		//rec_len = read(sock_fd,recbuf,sizeof(recbuf));
-		//recbuf[rec_len] = '\0';
-		//printf("The info from server is: %s\n",recbuf);
+		rec_len = read(sock_fd,recbuf,sizeof(recbuf));
+		recbuf[rec_len] = '\0';
+		printf("The info from server is: %s\n",recbuf);
     }
     /*------------------------close--------------------------*/
     close(sock_fd);

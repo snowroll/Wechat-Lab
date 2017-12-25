@@ -6,8 +6,12 @@
 #include <string.h>        // for bzero
 #include <arpa/inet.h>
 #include <unistd.h>  //close
+#include <iostream>
+using namespace std;
 
-#define BUFFSIZE 50
+
+#define BUFFSIZE 500
+#define PORT 8001
 
 int main(){
 	int server_fd, connect_fd;
@@ -28,7 +32,7 @@ int main(){
     bzero(&server,sizeof(server));  //绑定套接字到一个ip地址和一个端口上（bind()）
     server.sin_family = AF_INET;  //地址族
 	server.sin_addr.s_addr = htonl(INADDR_ANY);  //备用
-    server.sin_port = htons(8002);  //绑定端口
+    server.sin_port = htons(PORT);  //绑定端口
     //server.sin_addr.s_addr = inet_addr(127.0.0.1);  //服务器ip
 	
 	
@@ -67,20 +71,20 @@ int main(){
 	   
 	
 	while(1){
-		printf(" in while \n");
 		bzero(recbuf,sizeof(recbuf));
 		rec_n = recv(connect_fd, recbuf, BUFFSIZE, 0);
 		recbuf[rec_n] = '\0';
-		//if((memcmp("bye",recbuf,3))== 0){  //比较前3位是否为bye，决定是否关闭connect
-		//	printf("再见，之后关闭连接 \n");
-		//	break;
-		//}
+		if((memcmp("bye",recbuf,3))== 0){  //比较前3位是否为bye，决定是否关闭connect
+			printf("再见，之后关闭连接 \n");
+			break;
+		}
 		printf("收到消息： %s\n", recbuf);
 		
-		//bzero(wrbuf,sizeof(wrbuf));
-		//printf("请输入回复信息： \n");
-		//scanf("%s", wrbuf);  //todo here
-		//write(connect_fd,wrbuf,sizeof(wrbuf));
+		bzero(wrbuf,sizeof(wrbuf));
+		printf("请输入回复信息： \n");
+		cin.getline(wrbuf, BUFFSIZE);  //todo here
+		printf("键入信息为： %s\n", wrbuf);
+		write(connect_fd,wrbuf,sizeof(wrbuf));
 		//rebuf[revlen] = '\0';
 		//printf("the info from client is:%s\n",rebuf);
 		//serial++;
