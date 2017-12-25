@@ -16,6 +16,7 @@ public:
     explicit wechat_client(QWidget *parent = 0);
     ~wechat_client();
 
+
 private slots:
     void on_send_button_clicked();
 
@@ -23,7 +24,7 @@ private slots:
 
 private:
     Ui::wechat_client *ui;
-     QTcpSocket *client;
+
 };
 
 #endif // WECHAT_CLIENT_H

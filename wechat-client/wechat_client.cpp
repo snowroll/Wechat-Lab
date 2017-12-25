@@ -8,7 +8,6 @@ wechat_client::wechat_client(QWidget *parent) :
     ui(new Ui::wechat_client)
 {
     ui->setupUi(this);
-    client = new QTcpSocket(this);
 
 }
 
@@ -23,10 +22,13 @@ void wechat_client::on_send_button_clicked()
     QString msg = ui->info_edit->toPlainText();
     QByteArray ba = msg.toLatin1();
     msg_ch=ba.data();
-    client->write(msg_ch);
+    //client->write(msg_ch);
 }
 
 void wechat_client::on_link_button_clicked()
 {
-    client->connectToHost(QHostAddress("127.0.0.1"), 8001);
+    //client->connectToHost(QHostAddress("127.0.0.1"), 8001);
+    //client->waitForConnected(400);
+//    if(client->state() == QAbstractSocket::ConnectedState)
+//        ui->link_button->setText("connected");
 }

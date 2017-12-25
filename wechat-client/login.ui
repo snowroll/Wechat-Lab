@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>login</class>
+ <widget class="QWidget" name="login">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="title">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>10</y>
+     <width>67</width>
+     <height>17</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>wechat</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="name_label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>120</y>
+     <width>91</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>user name:</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="pass_label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>160</y>
+     <width>81</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>password:</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="name_edit">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>120</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="pass_edit">
+   <property name="geometry">
+    <rect>
+     <x>170</x>
+     <y>160</y>
+     <width>131</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="login_btn">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>220</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>login</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="reg_btn">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>220</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>register</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

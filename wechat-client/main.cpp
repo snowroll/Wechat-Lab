@@ -1,14 +1,12 @@
 #include "wechat_client.h"
+#include "login.h"
 #include <QApplication>
 
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    wechat_client w;
-    w.show();
-
-
-
+    login login_view;
+    login_view.show();
     return a.exec();
 }

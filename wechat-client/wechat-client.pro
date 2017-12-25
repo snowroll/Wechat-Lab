@@ -25,8 +25,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 
 SOURCES += main.cpp\
-        wechat_client.cpp
+        wechat_client.cpp \
+    login.cpp
 
-HEADERS  += wechat_client.h
+HEADERS  += wechat_client.h \
+    login.h
 
-FORMS    += wechat_client.ui
+FORMS    += wechat_client.ui \
+    login.ui
