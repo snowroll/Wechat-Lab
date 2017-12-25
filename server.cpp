@@ -13,6 +13,7 @@ using namespace std;
 #define BUFFSIZE 500
 #define PORT 8001
 
+
 int main(){
 	int server_fd, connect_fd;
 	struct sockaddr_in server;  //服务器地址
@@ -65,9 +66,10 @@ int main(){
     /*---------------------show client---------------*/
     printf("连接成功 \n");
 
+	/*----------------------login and sign up ------*/
+		
+	
     /*----------------------read and write----------*/
-    //rec_n = recv(connect_fd, recbuf, BUFFSIZE, 0);
-	//recbuf[rec_n] = '\0';
 	   
 	
 	while(1){
