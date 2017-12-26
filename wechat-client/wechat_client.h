@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtNetwork/QTcpSocket>
 
+
 namespace Ui {
 class wechat_client;
 }
@@ -19,8 +20,8 @@ public:
 
 private slots:
     void on_send_button_clicked();
-
     void on_link_button_clicked();
+    void receivelogin();
 
 private:
     Ui::wechat_client *ui;

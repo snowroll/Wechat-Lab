@@ -1,5 +1,7 @@
-#include <string.h>
+#include <string>
 #include <fstream>
+#include <sstream>
+#include <stdio.h>
 
 struct user{
 	char name[50];
@@ -48,25 +50,40 @@ struct user{
 int login(char name[], char password[]){  //登录
     std::ifstream fin;
     fin.open("user.txt", std::ios_base::in);
+	char line[1024] = {0};
     if(fin.fail())
     {
         std::cout << "文件打开失败";
+		printf("文件打开失败\n");
     }
-    int f1;
+    int f1 = 0;
 	user cur_user;
-  	while(fin >> cur_user.name >> cur_user.password)
-    {
-        if(cur_user.name == name && cur_user.password == password)
+	int i = 0;
+  	while(fin.getline(line, sizeof(line)))
+    {	
+		i++;
+		printf("第%d次\n", i);
+		//fin.getline(cur_user.name, 50);
+		//fin.getline(cur_user.password, 50);
+		std::stringstream word(line);
+		word >> cur_user.name;
+		word >> cur_user.password;
+		printf("%s\n", cur_user.name);
+		printf("%s\n", cur_user.password);
+        if((strcmp(cur_user.name, name) == 0) && strcmp(cur_user.password, password) == 0)
         {
             std::cout << "登陆成功";
+			printf("登录成功");
             f1=1;//登录成功标志
             return 0;
         }
     }
     if(f1 == 0)//f1==0登录失败
     {
+		std::cout << "用户名或密码错误";
+		printf("登录失败\n");
 		return -1;
-        std::cout << "用户名或密码错误";
+        
         
     }
 }

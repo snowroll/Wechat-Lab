@@ -8,7 +8,6 @@ wechat_client::wechat_client(QWidget *parent) :
     ui(new Ui::wechat_client)
 {
     ui->setupUi(this);
-
 }
 
 wechat_client::~wechat_client()
@@ -31,4 +30,9 @@ void wechat_client::on_link_button_clicked()
     //client->waitForConnected(400);
 //    if(client->state() == QAbstractSocket::ConnectedState)
 //        ui->link_button->setText("connected");
+}
+
+void wechat_client::receivelogin()
+{
+    this->show();
 }
