@@ -119,6 +119,33 @@ int main(){
 			}
 		}
 		
+		if((memcmp("register", recbuf, 8)) == 0){
+			int i = 0;
+			char* substr = strtok(recbuf, seg);
+			while(substr != NULL){
+				if(i == 0)
+					strcpy(unuse_char, substr);
+				if(i == 1){
+					strcpy(users[user_num].name, substr);
+					printf("user-name: %s\n", users[user_num].name);
+				}
+				if(i == 2){
+					strcpy(users[user_num].password, substr);
+					printf("user-pass: %s\n", users[user_num].password);
+				}
+				i++;
+				substr = strtok(NULL, seg);
+			}
+			if(regist(users[user_num].name, users[user_num].password) == -1){  //register函数  失败返回 -1  成功返回0
+ 				strcpy(wrbuf, "user_existed");
+				write(connect_fd, wrbuf, sizeof(wrbuf));
+			}
+			else{
+				strcpy(wrbuf, "success");
+				write(connect_fd, wrbuf, sizeof(wrbuf));
+			}
+		}
+		
 		//printf("请输入回复信息： \n");
 		//cin.getline(wrbuf, BUFFSIZE);  //todo here
 		//printf("键入信息为： %s\n", wrbuf);
