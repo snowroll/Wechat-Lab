@@ -6,6 +6,8 @@
 #include <string.h>        // for bzero
 #include <arpa/inet.h>
 #include <unistd.h>  //close
+#include <cstdio>
+#include <pthread.h>  //多线程
 #include <iostream>
 #include "login.h"
 using namespace std;
@@ -13,8 +15,9 @@ using namespace std;
 
 #define BUFFSIZE 500
 #define PORT 8001
-
-
+ 
+void *run(void *arg);  //thread execute function
+	
 int main(){
 	user users[100];
 	int user_num = 0;  //用户数量
@@ -57,26 +60,44 @@ int main(){
     }
 
 	printf("***********     等待客户端发送请求     *********** \n");
-		
-    /* fifth step 接受请求 */
-	int sin_size = sizeof(struct sockaddr_in);
-	connect_fd = accept(server_fd, (struct sockaddr *)NULL, NULL);
-    if(connect_fd == -1){
-        perror("接受请求失败 \n");
-        exit(1);
-    }
+	unsigned client_port = 0;  //客户端端口
+	char client_ip[20];
+	pthread_t tid;  //多线程
 	   
     /*---------------------show client---------------*/
     printf("连接成功 \n");
 
-	/*----------------------login and sign up ------*/
-		
 	
     /*----------------------read and write----------*/
 	   
-	char seg[] = ",";
-	char unuse_char[50];
 	while(1){
+		connect_fd = accept(server_fd, (struct sockaddr *)NULL, NULL);
+		if(connect_fd == -1){
+			perror("接受请求失败 \n");
+			exit(1);
+		}
+		
+		pthread_create(&tid, NULL, run, (void *)&connect_fd);
+		pthread_detach(tid);
+		
+    }
+
+    /*----------------------close-------------------*/
+    close(server_fd);
+
+    return 0;
+}
+
+void *run(void *arg){  //thread execute function
+	int connect_fd = *((int*)arg);
+	int rec_n = 0;
+	char recbuf[BUFFSIZE];   
+	char wrbuf[BUFFSIZE]; 
+	char seg[] = ",";  //分割符
+	char unuse_char[50];  //无用符号
+	while(1){
+		//len = read(client_fd, buf, sizeof(buf));  //read data from client
+		
 		bzero(recbuf,sizeof(recbuf));
 		rec_n = recv(connect_fd, recbuf, BUFFSIZE, 0);
 		recbuf[rec_n] = '\0';
@@ -94,22 +115,22 @@ int main(){
 				if(i == 0)
 					strcpy(unuse_char, substr);
 				if(i == 1){
-					strcpy(users[user_num].name, substr);
-					printf("user-name: %s\n", users[user_num].name);
+					strcpy(users.name, substr);
+					//printf("user-name: %s\n", users.name);
 				}
 				if(i == 2){
-					strcpy(users[user_num].password, substr);
-					printf("user-pass: %s\n", users[user_num].password);
+					strcpy(users.password, substr);
+					//printf("user-pass: %s\n", users.password);
 				}
 				i++;
 				substr = strtok(NULL, seg);
 			}
-			if(login(users[user_num].name, users[user_num].password) == -1){  //login函数  用户名 密码正确返回0  密码错误返回-1  用户名不存在返回-2
+			if(login(users.name, users.password) == -1){  //login函数  用户名 密码正确返回0  密码错误返回-1  用户名不存在返回-2
 			
  				strcpy(wrbuf, "password_error");
 				write(connect_fd, wrbuf, sizeof(wrbuf));
 			}
-			else if(login(users[user_num].name, users[user_num].password) == -2){
+			else if(login(users.name, users.password) == -2){
 				strcpy(wrbuf, "user_not_exist");
 				write(connect_fd, wrbuf, sizeof(wrbuf));
 			}
@@ -126,17 +147,17 @@ int main(){
 				if(i == 0)
 					strcpy(unuse_char, substr);
 				if(i == 1){
-					strcpy(users[user_num].name, substr);
-					printf("user-name: %s\n", users[user_num].name);
+					strcpy(users.name, substr);
+					//printf("user-name: %s\n", users.name);
 				}
 				if(i == 2){
-					strcpy(users[user_num].password, substr);
-					printf("user-pass: %s\n", users[user_num].password);
+					strcpy(users.password, substr);
+					//printf("user-pass: %s\n", users.password);
 				}
 				i++;
 				substr = strtok(NULL, seg);
 			}
-			if(regist(users[user_num].name, users[user_num].password) == -1){  //register函数  失败返回 -1  成功返回0
+			if(regist(users.name, users.password) == -1){  //register函数  失败返回 -1  成功返回0
  				strcpy(wrbuf, "user_existed");
 				write(connect_fd, wrbuf, sizeof(wrbuf));
 			}
@@ -146,15 +167,12 @@ int main(){
 			}
 		}
 		
-		//printf("请输入回复信息： \n");
-		//cin.getline(wrbuf, BUFFSIZE);  //todo here
-		//printf("键入信息为： %s\n", wrbuf);
-		//write(connect_fd,wrbuf,sizeof(wrbuf));
-    }
-
-    /*----------------------close-------------------*/
-    close(connect_fd);
-    close(server_fd);
-
-    return 0;
+		if(rec_n == 0){
+			cout << "client disconnected." << endl;
+			close(connect_fd);
+			break;
+		}
+		//len = write(client_fd, buf, len);  //echo to client
+	}
+	return NULL;
 }

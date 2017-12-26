@@ -7,6 +7,7 @@ struct user{
 	char name[50];
 	char password[50];
 };
+user users;
 
 int regist(char name[], char password[]){	
 	std::ifstream fin;
@@ -14,7 +15,6 @@ int regist(char name[], char password[]){
 	char line[1024] = {0};
     if(fin.fail())
     {
-        std::cout << "文件打开失败";
 		printf("文件打开失败\n");
     }
     int flag = 0;
@@ -24,8 +24,8 @@ int regist(char name[], char password[]){
 		std::stringstream word(line);  //按空格切分读入的一行字符串
 		word >> cur_user.name;
 		word >> cur_user.password;
-		printf("%s\n", cur_user.name);
-		printf("%s\n", cur_user.password);
+		//printf("%s\n", cur_user.name);
+		//printf("%s\n", cur_user.password);
         if(strcmp(cur_user.name, name) == 0)
         {
   			printf("用户名已存在");
@@ -47,7 +47,6 @@ int login(char name[], char password[]){  //登录
 	char line[1024] = {0};
     if(fin.fail())
     {
-        std::cout << "文件打开失败";
 		printf("文件打开失败\n");
     }
     int flag = 0;
@@ -57,16 +56,16 @@ int login(char name[], char password[]){  //登录
 		std::stringstream word(line);  //按空格切分读入的一行字符串
 		word >> cur_user.name;
 		word >> cur_user.password;
-		printf("%s\n", cur_user.name);
-		printf("%s\n", cur_user.password);
+		//printf("%s\n", cur_user.name);
+		//printf("%s\n", cur_user.password);
         if((strcmp(cur_user.name, name) == 0) && strcmp(cur_user.password, password) == 0)
         {
-  			printf("登录成功");
+  			printf("登录成功\n");
             flag = 1;//登录成功标志
             return 0;
         }
 		else if((strcmp(cur_user.name, name) == 0) && strcmp(cur_user.password, password) != 0){
-			printf("密码错误");
+			printf("密码错误\n");
 			flag = 2;
 			return -1;
 		}
