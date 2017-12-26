@@ -7,6 +7,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>  //close
 #include <iostream>
+#include "login.h"
 using namespace std;
 
 
@@ -15,6 +16,8 @@ using namespace std;
 
 
 int main(){
+	user users[100];
+	int user_num = 0;  //用户数量
 	int server_fd, connect_fd;
 	struct sockaddr_in server;  //服务器地址
 	char recbuf[BUFFSIZE];   
@@ -71,7 +74,8 @@ int main(){
 	
     /*----------------------read and write----------*/
 	   
-	
+	char seg[] = ",";
+	char unuse_char[50];
 	while(1){
 		bzero(recbuf,sizeof(recbuf));
 		rec_n = recv(connect_fd, recbuf, BUFFSIZE, 0);
@@ -83,13 +87,42 @@ int main(){
 		printf("收到消息： %s\n", recbuf);
 		
 		bzero(wrbuf,sizeof(wrbuf));
-		printf("请输入回复信息： \n");
-		cin.getline(wrbuf, BUFFSIZE);  //todo here
-		printf("键入信息为： %s\n", wrbuf);
-		write(connect_fd,wrbuf,sizeof(wrbuf));
-		//rebuf[revlen] = '\0';
-		//printf("the info from client is:%s\n",rebuf);
-		//serial++;
+		if((memcmp("login", recbuf, 5)) == 0){
+			int i = 0;
+			char* substr = strtok(recbuf, seg);
+			while(substr != NULL){
+				if(i == 0)
+					strcpy(unuse_char, substr);
+				if(i == 1){
+					strcpy(users[user_num].name, substr);
+					printf("user-name: %s\n", users[user_num].name);
+				}
+				if(i == 2){
+					strcpy(users[user_num].password, substr);
+					printf("user-pass: %s\n", users[user_num].password);
+				}
+				i++;
+				substr = strtok(NULL, seg);
+			}
+			if(login(users[user_num].name, users[user_num].password) == -1){  //login函数  用户名 密码正确返回0  密码错误返回-1  用户名不存在返回-2
+			
+ 				strcpy(wrbuf, "password_error");
+				write(connect_fd, wrbuf, sizeof(wrbuf));
+			}
+			else if(login(users[user_num].name, users[user_num].password) == -2){
+				strcpy(wrbuf, "user_not_exist");
+				write(connect_fd, wrbuf, sizeof(wrbuf));
+			}
+			else{
+				strcpy(wrbuf, "ok");
+				write(connect_fd, wrbuf, sizeof(wrbuf));
+			}
+		}
+		
+		//printf("请输入回复信息： \n");
+		//cin.getline(wrbuf, BUFFSIZE);  //todo here
+		//printf("键入信息为： %s\n", wrbuf);
+		//write(connect_fd,wrbuf,sizeof(wrbuf));
     }
 
     /*----------------------close-------------------*/

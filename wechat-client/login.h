@@ -18,12 +18,16 @@ public:
 
 private slots:
     void on_login_btn_clicked();
-
     void on_reg_btn_clicked();
+    //void sendMessage();
+    void readMessage();
+
 
 private:
     Ui::login *ui;
     QTcpSocket *client;
+    QString message;
+    quint16 blockSize;  //store data size
 };
 
 #endif // LOGIN_H
