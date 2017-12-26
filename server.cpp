@@ -10,12 +10,15 @@
 #include <pthread.h>  //多线程
 #include <iostream>
 #include "login.h"
+#include "Dict.h"
 using namespace std;
 
 
 #define BUFFSIZE 500
 #define PORT 8001
- 
+
+
+Dict dict;
 void *run(void *arg);  //thread execute function
 	
 int main(){
@@ -96,7 +99,6 @@ void *run(void *arg){  //thread execute function
 	char seg[] = ",";  //分割符
 	char unuse_char[50];  //无用符号
 	while(1){
-		//len = read(client_fd, buf, sizeof(buf));  //read data from client
 		
 		bzero(recbuf,sizeof(recbuf));
 		rec_n = recv(connect_fd, recbuf, BUFFSIZE, 0);
@@ -136,6 +138,8 @@ void *run(void *arg){  //thread execute function
 			}
 			else{
 				strcpy(wrbuf, "ok");
+				dict.update(users.name, connect_fd);
+				dict.show();
 				write(connect_fd, wrbuf, sizeof(wrbuf));
 			}
 		}

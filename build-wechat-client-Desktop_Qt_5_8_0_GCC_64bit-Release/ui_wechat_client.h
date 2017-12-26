@@ -15,11 +15,11 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
 
@@ -30,9 +30,11 @@ class Ui_wechat_client
 public:
     QWidget *centralWidget;
     QLabel *label;
-    QPushButton *send_button;
-    QTextEdit *info_edit;
-    QPushButton *link_button;
+    QLabel *online_label;
+    QListView *online_list;
+    QPushButton *add_btn;
+    QPushButton *chat_btn;
+    QPushButton *friends_btn;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -46,16 +48,22 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         label = new QLabel(centralWidget);
         label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(10, 0, 67, 17));
-        send_button = new QPushButton(centralWidget);
-        send_button->setObjectName(QStringLiteral("send_button"));
-        send_button->setGeometry(QRect(190, 120, 89, 25));
-        info_edit = new QTextEdit(centralWidget);
-        info_edit->setObjectName(QStringLiteral("info_edit"));
-        info_edit->setGeometry(QRect(30, 60, 151, 91));
-        link_button = new QPushButton(centralWidget);
-        link_button->setObjectName(QStringLiteral("link_button"));
-        link_button->setGeometry(QRect(190, 80, 89, 25));
+        label->setGeometry(QRect(160, 0, 67, 17));
+        online_label = new QLabel(centralWidget);
+        online_label->setObjectName(QStringLiteral("online_label"));
+        online_label->setGeometry(QRect(300, 30, 91, 20));
+        online_list = new QListView(centralWidget);
+        online_list->setObjectName(QStringLiteral("online_list"));
+        online_list->setGeometry(QRect(175, 50, 221, 192));
+        add_btn = new QPushButton(centralWidget);
+        add_btn->setObjectName(QStringLiteral("add_btn"));
+        add_btn->setGeometry(QRect(20, 120, 89, 25));
+        chat_btn = new QPushButton(centralWidget);
+        chat_btn->setObjectName(QStringLiteral("chat_btn"));
+        chat_btn->setGeometry(QRect(20, 160, 89, 25));
+        friends_btn = new QPushButton(centralWidget);
+        friends_btn->setObjectName(QStringLiteral("friends_btn"));
+        friends_btn->setGeometry(QRect(20, 200, 89, 25));
         wechat_client->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(wechat_client);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -77,8 +85,10 @@ public:
     {
         wechat_client->setWindowTitle(QApplication::translate("wechat_client", "wechat_client", Q_NULLPTR));
         label->setText(QApplication::translate("wechat_client", "Wechat", Q_NULLPTR));
-        send_button->setText(QApplication::translate("wechat_client", "send", Q_NULLPTR));
-        link_button->setText(QApplication::translate("wechat_client", "connect", Q_NULLPTR));
+        online_label->setText(QApplication::translate("wechat_client", "online-users", Q_NULLPTR));
+        add_btn->setText(QApplication::translate("wechat_client", "add friend", Q_NULLPTR));
+        chat_btn->setText(QApplication::translate("wechat_client", "chat", Q_NULLPTR));
+        friends_btn->setText(QApplication::translate("wechat_client", "my friends", Q_NULLPTR));
     } // retranslateUi
 
 };

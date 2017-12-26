@@ -18,9 +18,9 @@ wechat_client::~wechat_client()
 void wechat_client::on_send_button_clicked()
 {
     char* msg_ch;
-    QString msg = ui->info_edit->toPlainText();
-    QByteArray ba = msg.toLatin1();
-    msg_ch=ba.data();
+//    QString msg = ui->info_edit->toPlainText();
+//    QByteArray ba = msg.toLatin1();
+//    msg_ch=ba.data();
     //client->write(msg_ch);
 }
 

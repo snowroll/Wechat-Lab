@@ -17,7 +17,7 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>10</x>
+      <x>160</x>
       <y>0</y>
       <width>67</width>
       <height>17</height>
@@ -27,40 +27,66 @@
      <string>Wechat</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="send_button">
+   <widget class="QLabel" name="online_label">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>300</x>
+      <y>30</y>
+      <width>91</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>online-users</string>
+    </property>
+   </widget>
+   <widget class="QListView" name="online_list">
+    <property name="geometry">
+     <rect>
+      <x>175</x>
+      <y>50</y>
+      <width>221</width>
+      <height>192</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="add_btn">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
       <y>120</y>
       <width>89</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>send</string>
+     <string>add friend</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="info_edit">
+   <widget class="QPushButton" name="chat_btn">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>60</y>
-      <width>151</width>
-      <height>91</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="link_button">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>80</y>
+      <x>20</x>
+      <y>160</y>
       <width>89</width>
       <height>25</height>
      </rect>
     </property>
     <property name="text">
-     <string>connect</string>
+     <string>chat</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="friends_btn">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>200</y>
+      <width>89</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>my friends</string>
     </property>
    </widget>
   </widget>
