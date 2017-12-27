@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QListView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -36,6 +37,7 @@ public:
     QPushButton *chat_btn;
     QPushButton *friends_btn;
     QPushButton *update_btn;
+    QLineEdit *name_edit;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -68,6 +70,9 @@ public:
         update_btn = new QPushButton(centralWidget);
         update_btn->setObjectName(QStringLiteral("update_btn"));
         update_btn->setGeometry(QRect(250, 200, 89, 25));
+        name_edit = new QLineEdit(centralWidget);
+        name_edit->setObjectName(QStringLiteral("name_edit"));
+        name_edit->setGeometry(QRect(20, 80, 91, 25));
         wechat_client->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(wechat_client);
         menuBar->setObjectName(QStringLiteral("menuBar"));

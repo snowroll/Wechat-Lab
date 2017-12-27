@@ -3,6 +3,8 @@
 #include "login.h"
 #include <QtNetwork/QSctpSocket>
 #include <QStringListModel>
+#include <QStandardItemModel>
+#include <QMessageBox>
 #include <string.h>
 
 wechat_client::wechat_client(QWidget *parent) :
@@ -33,4 +35,21 @@ void wechat_client::readyupdate(QString names){
     lst = names.split(QRegExp("[,]"));
     QStringListModel *model = new QStringListModel(lst);
     ui->online_list->setModel(model);
+}
+
+void wechat_client::on_chat_btn_clicked()
+{
+    QString chat_name = ui->name_edit->text();
+    if(chat_name == NULL){  //not select user
+        QMessageBox::information(this, "warning", "please input one person to chat");
+    }
+    else{
+        emit chat_begin(chat_name);
+        this->close();
+    }
+
+}
+
+void wechat_client::reshow(){
+    this->show();
 }

@@ -187,6 +187,36 @@ void *run(void *arg){  //thread execute function
 			write(connect_fd, wrbuf, sizeof(wrbuf));
 		}
 		
+		/*    发送消息    */
+		if((memcmp("send", recbuf, 4)) == 0){
+			int i = 0;
+			char send_name[500];
+			char receive_name[500];
+			char back_data[1024];
+			strcpy(back_data, recbuf);
+			char msg[1024];  //数据量可以改
+			char* substr = strtok(recbuf, seg);
+			while(substr != NULL){
+				if(i == 0)
+					strcpy(unuse_char, substr);
+				if(i == 1){
+					strcpy(receive_name, substr);
+				}
+				if(i == 2){
+					strcpy(send_name, substr);  
+				}
+				if(i == 3){
+					strcpy(msg, substr);
+				}
+				i++;
+				substr = strtok(NULL, seg);
+			}
+			int chat_fd = dict.get(receive_name);
+			printf("find another fd is %d\n", chat_fd);
+			write(chat_fd, back_data, sizeof(recbuf));
+			printf("send recbuf is %s", back_data);
+		}
+		
 		/*    关闭连接    */
 		if(rec_n == 0){
 			cout << "client disconnected." << endl;

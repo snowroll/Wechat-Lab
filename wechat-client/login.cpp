@@ -11,11 +11,21 @@ login::login(QWidget *parent) :
     ui->setupUi(this);
     client = new QTcpSocket(this);
     wechat_view = new wechat_client();
+    chat_view = new chat();
     client->connectToHost(QHostAddress("127.0.0.1"), 8001);
     connect(client, SIGNAL(readyRead()), this, SLOT(readMessage()));//当有消息接受时会触发接收
     connect(this, SIGNAL(login_success()), wechat_view, SLOT(receivelogin()));
     connect(wechat_view, SIGNAL(update_list()), this, SLOT(receiveupdate()));  //update give to soket then send to server
     connect(this, SIGNAL(update_data(QString)), wechat_view, SLOT(readyupdate(QString)));  //receive data from server then update ui
+    connect(wechat_view, SIGNAL(chat_begin(QString)), chat_view, SLOT(ready_chat(QString)));
+    connect(wechat_view, SIGNAL(chat_begin(QString)), this, SLOT(update_chat_name(QString)));
+    connect(chat_view, SIGNAL(exit()), wechat_view, SLOT(reshow()));
+    connect(chat_view, SIGNAL(exit()), this,  SLOT(erase_name()));
+    connect(chat_view, SIGNAL(send_msg(QString)), this, SLOT(msg_send(QString)));
+
+    /*  receive msg  */
+    connect(this, SIGNAL(receive_msg(QString)), chat_view, SLOT(chat_ing(QString)));
+    connect(chat_view, SIGNAL(update_chat_name(QString)), this, SLOT(update_name(QString)));
 }
 
 login::~login()
@@ -28,6 +38,7 @@ void login::on_login_btn_clicked()
 
     char* msg_info;
     QString username = ui->name_edit->text();
+    my_name = username;  //copy name to local varible
     QString password = ui->pass_edit->text();
     QString login_info = "login," + username + "," + password;
     QByteArray QB_info = login_info.toLatin1();
@@ -84,11 +95,39 @@ void login::readMessage()
         emit update_data(names);
     }
 
-
+    tag = msg.mid(0, 4);
+    if(tag == "send"){
+        emit receive_msg(msg);
+    }
 }
 
 void login::receiveupdate(){
     qDebug("receive update signal");
     char* update_info = "update";
     client->write(update_info);
+}
+
+void login::msg_send(QString msg){
+    char* msg_final;
+    QString final_msg = "send,";
+    final_msg += cur_chat_name;
+    final_msg += ",";
+    final_msg += my_name;
+    final_msg += ",";
+    final_msg += msg;
+    QByteArray QB_info = final_msg.toLatin1();
+    msg_final = QB_info.data();
+    client->write(msg_final);
+}
+
+void login::update_chat_name(QString names){
+    cur_chat_name = names;
+}
+
+void login::erase_name(){
+    cur_chat_name = "";
+}
+
+void login::update_name(QString name){
+    cur_chat_name = name;
 }

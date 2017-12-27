@@ -8,3 +8,4 @@
 7. QString如何获取子字符串                    QString x = "Nine pineapples"; QString y = x.mid(5, 4);   //mid 两个参数 起始位置 长度   
 8. QT 不同窗口如何相互传递参数                 signal - 传输信号，数值  slot - 接收signal中的数值
 9. QString如何分割                            QStringList lst;  QString test("one,two，three"); lst=test.split(QRegExp("[,]")); 
+10. QListview 如何获取选中元素
