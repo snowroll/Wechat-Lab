@@ -248,6 +248,27 @@ void *run(void *arg){  //thread execute function
 			}
 		}
 		
+		/*  显示好友列表  */
+		if((memcmp("flist", recbuf, 5)) == 0){
+			int i = 0;
+			char user_name[500];
+			char* substr = strtok(recbuf, seg);
+			while(substr != NULL){
+				if(i == 0)
+					strcpy(unuse_char, substr);
+				if(i == 1){
+					strcpy(user_name, substr);
+				}
+				i++;
+				substr = strtok(NULL, seg);
+			}
+			char* list = show_list(user_name);
+			int len = strlen(list);
+			write(connect_fd, list, strlen(list));
+			printf("friend is %s  length is %d \n", list, len);
+			if(list) delete [] list;  
+		}
+		
 		/*    关闭连接    */
 		if(rec_n == 0){
 			cout << "client disconnected." << endl;

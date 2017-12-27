@@ -24,6 +24,7 @@ signals:
     void update_data(QString);
     void receive_msg(QString);
     void add_res(QString);
+    void show_flist(QString);
 
 private slots:
     void on_login_btn_clicked();
@@ -34,7 +35,7 @@ private slots:
     void update_chat_name(QString);
     void erase_name();  //erase other name
     void update_name(QString);  //update other name
-
+    void friend_list_update();
     void friend_add(QString);
 
 private:

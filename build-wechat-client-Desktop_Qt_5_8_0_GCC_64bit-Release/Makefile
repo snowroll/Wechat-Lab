@@ -873,6 +873,58 @@ moc_login.cpp: /home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QWidget \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qicon.h \
+		ui_wechat_client.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/QVariant \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QAction \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qaction.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qactiongroup.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QApplication \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qapplication.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qeventloop.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qguiapplication.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qinputmethod.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QButtonGroup \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qbuttongroup.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QHeaderView \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qheaderview.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qframe.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstyleoption.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qvalidator.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qregularexpression.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qslider.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractslider.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstyle.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtabbar.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qrubberband.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QLabel \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlabel.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QLineEdit \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlineedit.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextcursor.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextformat.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qpen.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextoption.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QListView \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlistview.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QMenuBar \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmenubar.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmenu.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QPushButton \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QStatusBar \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstatusbar.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QToolBar \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtoolbar.h \
+		../wechat-client/chat.h \
 		../wechat-client/login.h \
 		moc_predefs.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/bin/moc
@@ -1123,13 +1175,58 @@ main.o: ../wechat-client/main.cpp ../wechat-client/wechat_client.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qabstractsocket.h \
 		../wechat-client/login.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QWidget \
+		ui_wechat_client.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/QVariant \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QAction \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qaction.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qactiongroup.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QApplication \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qapplication.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qcoreapplication.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qeventloop.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qguiapplication.h \
-		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qinputmethod.h
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qinputmethod.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QButtonGroup \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qbuttongroup.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QHeaderView \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qheaderview.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qframe.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstyleoption.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qvalidator.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qregularexpression.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qslider.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractslider.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstyle.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtabbar.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qrubberband.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QLabel \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlabel.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QLineEdit \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlineedit.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextcursor.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextformat.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qpen.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextoption.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QListView \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlistview.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QMenuBar \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmenubar.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmenu.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QPushButton \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QStatusBar \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstatusbar.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QToolBar \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtoolbar.h \
+		../wechat-client/chat.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../wechat-client/main.cpp
 
 wechat_client.o: ../wechat-client/wechat_client.cpp ../wechat-client/wechat_client.h \
@@ -1275,6 +1372,14 @@ wechat_client.o: ../wechat-client/wechat_client.cpp ../wechat-client/wechat_clie
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qrubberband.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QLabel \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlabel.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QLineEdit \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlineedit.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextcursor.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextformat.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qpen.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextoption.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QListView \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlistview.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QMenuBar \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmenubar.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmenu.h \
@@ -1283,20 +1388,22 @@ wechat_client.o: ../wechat-client/wechat_client.cpp ../wechat-client/wechat_clie
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractbutton.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QStatusBar \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstatusbar.h \
-		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QTextEdit \
-		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtextedit.h \
-		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextdocument.h \
-		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextoption.h \
-		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextcursor.h \
-		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextformat.h \
-		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qpen.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QToolBar \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtoolbar.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QWidget \
+		../wechat-client/login.h \
+		../wechat-client/chat.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtNetwork/QSctpSocket \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qsctpsocket.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qnetworkdatagram.h \
-		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qhostaddress.h
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qhostaddress.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/QStringListModel \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qstringlistmodel.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/QStandardItemModel \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qstandarditemmodel.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QMessageBox \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmessagebox.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o wechat_client.o ../wechat-client/wechat_client.cpp
 
 login.o: ../wechat-client/login.cpp ../wechat-client/login.h \
@@ -1411,7 +1518,7 @@ login.o: ../wechat-client/login.cpp ../wechat-client/login.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmainwindow.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtabwidget.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qicon.h \
-		ui_login.h \
+		ui_wechat_client.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/QVariant \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QAction \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qaction.h \
@@ -1450,13 +1557,25 @@ login.o: ../wechat-client/login.cpp ../wechat-client/login.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextformat.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qpen.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextoption.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QListView \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlistview.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QMenuBar \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmenubar.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmenu.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QPushButton \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qpushbutton.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QStatusBar \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstatusbar.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QToolBar \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtoolbar.h \
+		../wechat-client/chat.h \
+		ui_login.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtNetwork/QSctpSocket \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qsctpsocket.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qnetworkdatagram.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtNetwork/qhostaddress.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/QTextStream \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QMessageBox \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmessagebox.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qdialog.h
@@ -1564,7 +1683,56 @@ chat.o: ../wechat-client/chat.cpp ../wechat-client/chat.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qfiledevice.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qvector2d.h \
 		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtouchdevice.h \
-		ui_chat.h
+		ui_chat.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/QVariant \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QAction \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qaction.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qicon.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qactiongroup.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QApplication \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qapplication.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qcoreapplication.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qeventloop.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qguiapplication.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qinputmethod.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QButtonGroup \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qbuttongroup.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QHeaderView \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qheaderview.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qframe.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstyleoption.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qvalidator.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtCore/qregularexpression.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qslider.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractslider.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qstyle.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtabbar.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtabwidget.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qrubberband.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QLabel \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qlabel.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QPushButton \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qpushbutton.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QTextBrowser \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtextbrowser.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qtextedit.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextdocument.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextoption.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextcursor.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qtextformat.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtGui/qpen.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QTextEdit \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/QMessageBox \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qmessagebox.h \
+		/home/yu/Qt5.8.0/5.8/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chat.o ../wechat-client/chat.cpp
 
 moc_wechat_client.o: moc_wechat_client.cpp 

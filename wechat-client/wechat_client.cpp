@@ -27,6 +27,8 @@ void wechat_client::receivelogin()
 
 void wechat_client::on_update_btn_clicked()
 {
+    if(ui->online_label->text() == "Friend-list")
+        ui->online_label->setText("online-users");
     emit update_list();
 }
 
@@ -72,4 +74,22 @@ void wechat_client::res_add(QString msg){
         QMessageBox::information(this, "warning", "friend has been added");
     else
         QMessageBox::information(this, "success", "add friend success");
+}
+
+void wechat_client::on_friends_btn_clicked()
+{
+    ui->online_label->setText("Friend-list");
+    emit update_friend_list();
+}
+
+void wechat_client::flist_show(QString msg){
+    if(msg == "flist")
+        QMessageBox::information(this, "warnning", "you have no friend yet");
+    else{
+        QString friends = msg.mid(5);
+        QStringList lst;
+        lst = friends.split(QRegExp("[,]"));  //only one person maybe error??
+        QStringListModel *model = new QStringListModel(lst);
+        ui->online_list->setModel(model);
+    }
 }

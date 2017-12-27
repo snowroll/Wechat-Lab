@@ -30,6 +30,10 @@ login::login(QWidget *parent) :
     /*  add friend  */
     connect(wechat_view, SIGNAL(add_friend(QString)), this, SLOT(friend_add(QString)));
     connect(this, SIGNAL(add_res(QString)), wechat_view, SLOT(res_add(QString)));
+
+    /*  show friend  */
+    connect(wechat_view, SIGNAL(update_friend_list()), this, SLOT(friend_list_update()));
+    connect(this, SIGNAL(show_flist(QString)), wechat_view, SLOT(flist_show(QString)));
 }
 
 login::~login()
@@ -69,8 +73,11 @@ void login::on_reg_btn_clicked()
 void login::readMessage()
 {
     QString msg = client->readAll();
+    QTextStream cout(stdout, QIODevice::WriteOnly);
+    cout << msg << endl;
     char buf[1024];
     client->read(buf, 1024);
+
 
     /*   deal login & register    */
     if(msg == "ok"){
@@ -102,8 +109,8 @@ void login::readMessage()
     QString tag = msg.mid(0, 6);
     if(tag == "update"){
         QString names = msg.mid(7);
-        QTextStream cout(stdout, QIODevice::WriteOnly);
-        cout << names << endl;
+        //QTextStream cout(stdout, QIODevice::WriteOnly);
+        //cout << names << endl;
         emit update_data(names);
     }
 
@@ -112,6 +119,14 @@ void login::readMessage()
         emit receive_msg(msg);
     }
 
+    /*   show flist    */
+    tag = msg.mid(0, 5);
+    if(tag == "flist"){
+
+        emit show_flist(msg);
+    }
+
+    cout << msg << endl;
 }
 
 void login::receiveupdate(){
@@ -150,6 +165,14 @@ void login::friend_add(QString msg){
     QString final_msg = msg;
     final_msg += ",";
     final_msg += my_name;
+    QByteArray QB_info = final_msg.toLatin1();
+    msg_final = QB_info.data();
+    client->write(msg_final);
+}
+
+void login::friend_list_update(){
+    char* msg_final;
+    QString final_msg = "flist," + my_name;
     QByteArray QB_info = final_msg.toLatin1();
     msg_final = QB_info.data();
     client->write(msg_final);
