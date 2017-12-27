@@ -34,7 +34,13 @@ public:
 			printf("name %s  fd %d \n", names[i], orders[i]);
 		}
 	}
-private:
+	
+	int length(){
+		return count;
+	}
+	
 	char names[Max][50];
 	int orders[Max];
+private:	
+	
 };

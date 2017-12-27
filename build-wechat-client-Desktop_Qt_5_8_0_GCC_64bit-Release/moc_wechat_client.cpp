@@ -22,7 +22,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_wechat_client_t {
     QByteArrayData data[5];
-    char stringdata0[74];
+    char stringdata0[62];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,14 +32,14 @@ struct qt_meta_stringdata_wechat_client_t {
 static const qt_meta_stringdata_wechat_client_t qt_meta_stringdata_wechat_client = {
     {
 QT_MOC_LITERAL(0, 0, 13), // "wechat_client"
-QT_MOC_LITERAL(1, 14, 22), // "on_send_button_clicked"
-QT_MOC_LITERAL(2, 37, 0), // ""
-QT_MOC_LITERAL(3, 38, 22), // "on_link_button_clicked"
-QT_MOC_LITERAL(4, 61, 12) // "receivelogin"
+QT_MOC_LITERAL(1, 14, 11), // "update_list"
+QT_MOC_LITERAL(2, 26, 0), // ""
+QT_MOC_LITERAL(3, 27, 12), // "receivelogin"
+QT_MOC_LITERAL(4, 40, 21) // "on_update_btn_clicked"
 
     },
-    "wechat_client\0on_send_button_clicked\0"
-    "\0on_link_button_clicked\0receivelogin"
+    "wechat_client\0update_list\0\0receivelogin\0"
+    "on_update_btn_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -54,15 +54,19 @@ static const uint qt_meta_data_wechat_client[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       0,       // signalCount
+       1,       // signalCount
+
+ // signals: name, argc, parameters, tag, flags
+       1,    0,   29,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   29,    2, 0x08 /* Private */,
        3,    0,   30,    2, 0x08 /* Private */,
        4,    0,   31,    2, 0x08 /* Private */,
 
- // slots: parameters
+ // signals: parameters
     QMetaType::Void,
+
+ // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
 
@@ -75,10 +79,20 @@ void wechat_client::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         wechat_client *_t = static_cast<wechat_client *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->on_send_button_clicked(); break;
-        case 1: _t->on_link_button_clicked(); break;
-        case 2: _t->receivelogin(); break;
+        case 0: _t->update_list(); break;
+        case 1: _t->receivelogin(); break;
+        case 2: _t->on_update_btn_clicked(); break;
         default: ;
+        }
+    } else if (_c == QMetaObject::IndexOfMethod) {
+        int *result = reinterpret_cast<int *>(_a[0]);
+        void **func = reinterpret_cast<void **>(_a[1]);
+        {
+            typedef void (wechat_client::*_t)();
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&wechat_client::update_list)) {
+                *result = 0;
+                return;
+            }
         }
     }
     Q_UNUSED(_a);
@@ -118,6 +132,12 @@ int wechat_client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
         _id -= 3;
     }
     return _id;
+}
+
+// SIGNAL 0
+void wechat_client::update_list()
+{
+    QMetaObject::activate(this, &staticMetaObject, 0, Q_NULLPTR);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

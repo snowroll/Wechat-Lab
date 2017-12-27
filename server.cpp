@@ -41,8 +41,8 @@ int main(){
 	
     bzero(&server,sizeof(server));  //绑定套接字到一个ip地址和一个端口上（bind()）
     server.sin_family = AF_INET;  //地址族
-	server.sin_addr.s_addr = htonl(INADDR_ANY);  //备用
-    server.sin_port = htons(PORT);  //绑定端口
+	server.sin_addr.s_addr = htonl(INADDR_ANY);
+	server.sin_port = htons(PORT); 
     //server.sin_addr.s_addr = inet_addr(127.0.0.1);  //服务器ip
 	
 	
@@ -103,12 +103,15 @@ void *run(void *arg){  //thread execute function
 		bzero(recbuf,sizeof(recbuf));
 		rec_n = recv(connect_fd, recbuf, BUFFSIZE, 0);
 		recbuf[rec_n] = '\0';
+		printf("收到消息： %s\n", recbuf);
+		
+		/*    关闭连接    */
 		if((memcmp("bye",recbuf,3))== 0){  //比较前3位是否为bye，决定是否关闭connect
 			printf("再见，之后关闭连接 \n");
 			break;
 		}
-		printf("收到消息： %s\n", recbuf);
 		
+		/*    登录处理    */
 		bzero(wrbuf,sizeof(wrbuf));
 		if((memcmp("login", recbuf, 5)) == 0){
 			int i = 0;
@@ -118,11 +121,9 @@ void *run(void *arg){  //thread execute function
 					strcpy(unuse_char, substr);
 				if(i == 1){
 					strcpy(users.name, substr);
-					//printf("user-name: %s\n", users.name);
 				}
 				if(i == 2){
 					strcpy(users.password, substr);
-					//printf("user-pass: %s\n", users.password);
 				}
 				i++;
 				substr = strtok(NULL, seg);
@@ -144,6 +145,7 @@ void *run(void *arg){  //thread execute function
 			}
 		}
 		
+		/*    注册处理    */
 		if((memcmp("register", recbuf, 8)) == 0){
 			int i = 0;
 			char* substr = strtok(recbuf, seg);
@@ -152,11 +154,9 @@ void *run(void *arg){  //thread execute function
 					strcpy(unuse_char, substr);
 				if(i == 1){
 					strcpy(users.name, substr);
-					//printf("user-name: %s\n", users.name);
 				}
 				if(i == 2){
 					strcpy(users.password, substr);
-					//printf("user-pass: %s\n", users.password);
 				}
 				i++;
 				substr = strtok(NULL, seg);
@@ -171,6 +171,23 @@ void *run(void *arg){  //thread execute function
 			}
 		}
 		
+		/*    刷新列表    */
+		if((memcmp("update", recbuf, 6)) == 0){
+			strcpy(wrbuf, "update,");
+			int num = 7;
+			for(int i = 0; i < dict.length(); i++){
+				for(int j = 0; j < strlen(dict.names[i]); j++){
+					wrbuf[num] = dict.names[i][j];
+					num++;
+				}
+				wrbuf[num] = ',';
+				num++;
+			}
+			wrbuf[num] = '\0';
+			write(connect_fd, wrbuf, sizeof(wrbuf));
+		}
+		
+		/*    关闭连接    */
 		if(rec_n == 0){
 			cout << "client disconnected." << endl;
 			close(connect_fd);

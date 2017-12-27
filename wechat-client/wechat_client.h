@@ -17,15 +17,15 @@ public:
     explicit wechat_client(QWidget *parent = 0);
     ~wechat_client();
 
+signals:
+    void update_list();
 
 private slots:
-    void on_send_button_clicked();
-    void on_link_button_clicked();
     void receivelogin();
+    void on_update_btn_clicked();
 
 private:
     Ui::wechat_client *ui;
-
 };
 
 #endif // WECHAT_CLIENT_H

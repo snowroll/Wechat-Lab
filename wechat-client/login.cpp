@@ -1,6 +1,7 @@
 #include "login.h"
 #include "ui_login.h"
 #include <QtNetwork/QSctpSocket>
+#include <QTextStream>
 #include <QMessageBox>
 
 login::login(QWidget *parent) :
@@ -13,6 +14,7 @@ login::login(QWidget *parent) :
     client->connectToHost(QHostAddress("127.0.0.1"), 8001);
     connect(client, SIGNAL(readyRead()), this, SLOT(readMessage()));//当有消息接受时会触发接收
     connect(this, SIGNAL(login_success()), wechat_view, SLOT(receivelogin()));
+    connect(wechat_view, SIGNAL(update_list()), this, SLOT(receiveupdate()));
 }
 
 login::~login()
@@ -69,6 +71,12 @@ void login::readMessage()
     else if(msg == "success"){
         QMessageBox::information(this, "success", "register success");
     }
+    QTextStream cout(stdout, QIODevice::WriteOnly);
+    cout << msg << endl;
+}
 
-    //qDebug() << msg;
+void login::receiveupdate(){
+    qDebug("receive update signal");
+    char* update_info = "update";
+    client->write(update_info);
 }

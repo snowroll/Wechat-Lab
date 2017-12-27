@@ -1,0 +1,8 @@
+	问题						解决
+1. string not a type                         std::string / using namespace std;
+2. 字符数组的大小                             strlen(char* ) -- 实际长度
+3. qt 运行不显示界面                          已有的对象 又重新生成了一遍导致出错
+4. 不同窗口间如何传递信号                      在实例化的地方，将双向传递都实现了
+5. 定义的类识别不了                            在该类中包含了当前类的头文件，形成了嵌套，系统无法识别
+6. 如何打印QString                             QTextStream cout(stdout, QIODevice::WriteOnly);  cout << str << endl;
+7. 目前的问题 没处理，  
