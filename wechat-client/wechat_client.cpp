@@ -27,3 +27,10 @@ void wechat_client::on_update_btn_clicked()
 {
     emit update_list();
 }
+
+void wechat_client::readyupdate(QString names){
+    QStringList lst;
+    lst = names.split(QRegExp("[,]"));
+    QStringListModel *model = new QStringListModel(lst);
+    ui->online_list->setModel(model);
+}

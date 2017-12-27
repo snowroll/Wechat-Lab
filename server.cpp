@@ -183,7 +183,7 @@ void *run(void *arg){  //thread execute function
 				wrbuf[num] = ',';
 				num++;
 			}
-			wrbuf[num] = '\0';
+			wrbuf[--num] = '\0';
 			write(connect_fd, wrbuf, sizeof(wrbuf));
 		}
 		

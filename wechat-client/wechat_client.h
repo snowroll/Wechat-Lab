@@ -23,6 +23,7 @@ signals:
 private slots:
     void receivelogin();
     void on_update_btn_clicked();
+    void readyupdate(QString);
 
 private:
     Ui::wechat_client *ui;

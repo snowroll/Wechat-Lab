@@ -20,6 +20,7 @@ public:
 
 signals:
     void login_success();
+    void update_data(QString);
 
 private slots:
     void on_login_btn_clicked();

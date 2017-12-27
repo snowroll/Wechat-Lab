@@ -4,5 +4,7 @@
 3. qt 运行不显示界面                          已有的对象 又重新生成了一遍导致出错
 4. 不同窗口间如何传递信号                      在实例化的地方，将双向传递都实现了
 5. 定义的类识别不了                            在该类中包含了当前类的头文件，形成了嵌套，系统无法识别
-6. 如何打印QString                             QTextStream cout(stdout, QIODevice::WriteOnly);  cout << str << endl;
-7. 目前的问题 没处理，  
+6. 如何打印QString                           QTextStream cout(stdout, QIODevice::WriteOnly);  cout << str << endl;
+7. QString如何获取子字符串                    QString x = "Nine pineapples"; QString y = x.mid(5, 4);   //mid 两个参数 起始位置 长度   
+8. QT 不同窗口如何相互传递参数                 signal - 传输信号，数值  slot - 接收signal中的数值
+9. QString如何分割                            QStringList lst;  QString test("one,two，three"); lst=test.split(QRegExp("[,]")); 

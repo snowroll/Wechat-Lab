@@ -14,7 +14,8 @@ login::login(QWidget *parent) :
     client->connectToHost(QHostAddress("127.0.0.1"), 8001);
     connect(client, SIGNAL(readyRead()), this, SLOT(readMessage()));//当有消息接受时会触发接收
     connect(this, SIGNAL(login_success()), wechat_view, SLOT(receivelogin()));
-    connect(wechat_view, SIGNAL(update_list()), this, SLOT(receiveupdate()));
+    connect(wechat_view, SIGNAL(update_list()), this, SLOT(receiveupdate()));  //update give to soket then send to server
+    connect(this, SIGNAL(update_data(QString)), wechat_view, SLOT(readyupdate(QString)));  //receive data from server then update ui
 }
 
 login::~login()
@@ -55,6 +56,8 @@ void login::readMessage()
     QString msg = client->readAll();
     char buf[1024];
     client->read(buf, 1024);
+
+    /*   deal login & register    */
     if(msg == "ok"){
         emit login_success();
         this->close();
@@ -71,8 +74,17 @@ void login::readMessage()
     else if(msg == "success"){
         QMessageBox::information(this, "success", "register success");
     }
-    QTextStream cout(stdout, QIODevice::WriteOnly);
-    cout << msg << endl;
+
+    /*    deal update info    */
+    QString tag = msg.mid(0, 6);
+    if(tag == "update"){
+        QString names = msg.mid(7);
+        QTextStream cout(stdout, QIODevice::WriteOnly);
+        cout << names << endl;
+        emit update_data(names);
+    }
+
+
 }
 
 void login::receiveupdate(){
