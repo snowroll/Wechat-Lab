@@ -10,6 +10,7 @@
 #include <pthread.h>  //多线程
 #include <iostream>
 #include "login.h"
+#include "add_friend.h"
 #include "Dict.h"
 using namespace std;
 
@@ -217,6 +218,36 @@ void *run(void *arg){  //thread execute function
 			printf("send recbuf is %s", back_data);
 		}
 		
+		/*    添加好友    */
+		if((memcmp("add", recbuf, 3)) == 0){
+			int i = 0;
+			char add_name[500];
+			char user_name[500];
+			char* substr = strtok(recbuf, seg);
+			while(substr != NULL){
+				if(i == 0)
+					strcpy(unuse_char, substr);
+				if(i == 1){
+					strcpy(add_name, substr);
+				}
+				if(i == 2){
+					strcpy(user_name, substr);
+				}
+				i++;
+				substr = strtok(NULL, seg);
+			}
+			int res = add_friend(add_name, user_name);
+			add_friend(user_name, add_name);  //好友添加是双向的
+			if(res == -1){
+				char has_add[] = "addhas";
+				write(connect_fd, has_add, sizeof(has_add));
+			}
+			else{
+				char add_success[] = "addsucc";
+				write(connect_fd, add_success, sizeof(add_success));
+			}
+		}
+		
 		/*    关闭连接    */
 		if(rec_n == 0){
 			cout << "client disconnected." << endl;
@@ -227,3 +258,4 @@ void *run(void *arg){  //thread execute function
 	}
 	return NULL;
 }
+

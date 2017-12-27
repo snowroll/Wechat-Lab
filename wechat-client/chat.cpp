@@ -23,6 +23,7 @@ void chat::ready_chat(QString names)
 void chat::on_exit_btn_clicked()
 {
     emit exit();
+    this->close();
 }
 
 void chat::on_send_btn_clicked()

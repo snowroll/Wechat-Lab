@@ -53,3 +53,23 @@ void wechat_client::on_chat_btn_clicked()
 void wechat_client::reshow(){
     this->show();
 }
+
+void wechat_client::on_add_btn_clicked()
+{
+    QString chat_name = ui->name_edit->text();
+    if(chat_name == NULL){  //not select user
+        QMessageBox::information(this, "warning", "please input one person to chat");
+    }
+    else{
+        QString add_info = "add,";
+        add_info += chat_name;
+        emit add_friend(add_info);
+    }
+}
+
+void wechat_client::res_add(QString msg){
+    if(msg == "has")
+        QMessageBox::information(this, "warning", "friend has been added");
+    else
+        QMessageBox::information(this, "success", "add friend success");
+}

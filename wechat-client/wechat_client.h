@@ -20,6 +20,7 @@ public:
 signals:
     void update_list();
     void chat_begin(QString);
+    void add_friend(QString);
 
 private slots:
     void receivelogin();
@@ -27,6 +28,8 @@ private slots:
     void readyupdate(QString);
     void reshow();
     void on_chat_btn_clicked();
+    void res_add(QString);
+    void on_add_btn_clicked();
 
 private:
     Ui::wechat_client *ui;

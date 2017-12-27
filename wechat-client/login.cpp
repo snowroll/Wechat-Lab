@@ -26,6 +26,10 @@ login::login(QWidget *parent) :
     /*  receive msg  */
     connect(this, SIGNAL(receive_msg(QString)), chat_view, SLOT(chat_ing(QString)));
     connect(chat_view, SIGNAL(update_chat_name(QString)), this, SLOT(update_name(QString)));
+
+    /*  add friend  */
+    connect(wechat_view, SIGNAL(add_friend(QString)), this, SLOT(friend_add(QString)));
+    connect(this, SIGNAL(add_res(QString)), wechat_view, SLOT(res_add(QString)));
 }
 
 login::~login()
@@ -85,6 +89,14 @@ void login::readMessage()
     else if(msg == "success"){
         QMessageBox::information(this, "success", "register success");
     }
+    else if(msg == "addhas"){
+        QString str = "has";
+        emit add_res(str);
+    }
+    else if(msg == "addsucc"){
+        QString str = "success";
+        emit add_res(str);
+    }
 
     /*    deal update info    */
     QString tag = msg.mid(0, 6);
@@ -99,6 +111,7 @@ void login::readMessage()
     if(tag == "send"){
         emit receive_msg(msg);
     }
+
 }
 
 void login::receiveupdate(){
@@ -130,4 +143,14 @@ void login::erase_name(){
 
 void login::update_name(QString name){
     cur_chat_name = name;
+}
+
+void login::friend_add(QString msg){
+    char* msg_final;
+    QString final_msg = msg;
+    final_msg += ",";
+    final_msg += my_name;
+    QByteArray QB_info = final_msg.toLatin1();
+    msg_final = QB_info.data();
+    client->write(msg_final);
 }
