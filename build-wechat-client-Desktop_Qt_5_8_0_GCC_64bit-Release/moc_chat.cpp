@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_chat_t {
-    QByteArrayData data[9];
-    char stringdata0[97];
+    QByteArrayData data[15];
+    char stringdata0[199];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -36,15 +36,24 @@ QT_MOC_LITERAL(1, 5, 4), // "exit"
 QT_MOC_LITERAL(2, 10, 0), // ""
 QT_MOC_LITERAL(3, 11, 8), // "send_msg"
 QT_MOC_LITERAL(4, 20, 16), // "update_chat_name"
-QT_MOC_LITERAL(5, 37, 10), // "ready_chat"
-QT_MOC_LITERAL(6, 48, 19), // "on_exit_btn_clicked"
-QT_MOC_LITERAL(7, 68, 8), // "chat_ing"
-QT_MOC_LITERAL(8, 77, 19) // "on_send_btn_clicked"
+QT_MOC_LITERAL(5, 37, 14), // "send_file_name"
+QT_MOC_LITERAL(6, 52, 9), // "send_file"
+QT_MOC_LITERAL(7, 62, 10), // "ready_chat"
+QT_MOC_LITERAL(8, 73, 19), // "on_exit_btn_clicked"
+QT_MOC_LITERAL(9, 93, 8), // "chat_ing"
+QT_MOC_LITERAL(10, 102, 19), // "on_send_btn_clicked"
+QT_MOC_LITERAL(11, 122, 24), // "on_open_file_btn_clicked"
+QT_MOC_LITERAL(12, 147, 24), // "on_send_file_btn_clicked"
+QT_MOC_LITERAL(13, 172, 16), // "updClintProgress"
+QT_MOC_LITERAL(14, 189, 9) // "open_fail"
 
     },
     "chat\0exit\0\0send_msg\0update_chat_name\0"
-    "ready_chat\0on_exit_btn_clicked\0chat_ing\0"
-    "on_send_btn_clicked"
+    "send_file_name\0send_file\0ready_chat\0"
+    "on_exit_btn_clicked\0chat_ing\0"
+    "on_send_btn_clicked\0on_open_file_btn_clicked\0"
+    "on_send_file_btn_clicked\0updClintProgress\0"
+    "open_fail"
 };
 #undef QT_MOC_LITERAL
 
@@ -54,26 +63,34 @@ static const uint qt_meta_data_chat[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+      13,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       3,       // signalCount
+       5,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,   49,    2, 0x06 /* Public */,
-       3,    1,   50,    2, 0x06 /* Public */,
-       4,    1,   53,    2, 0x06 /* Public */,
+       1,    0,   79,    2, 0x06 /* Public */,
+       3,    1,   80,    2, 0x06 /* Public */,
+       4,    1,   83,    2, 0x06 /* Public */,
+       5,    1,   86,    2, 0x06 /* Public */,
+       6,    1,   89,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       5,    1,   56,    2, 0x08 /* Private */,
-       6,    0,   59,    2, 0x08 /* Private */,
-       7,    1,   60,    2, 0x08 /* Private */,
-       8,    0,   63,    2, 0x08 /* Private */,
+       7,    1,   92,    2, 0x08 /* Private */,
+       8,    0,   95,    2, 0x08 /* Private */,
+       9,    1,   96,    2, 0x08 /* Private */,
+      10,    0,   99,    2, 0x08 /* Private */,
+      11,    0,  100,    2, 0x08 /* Private */,
+      12,    0,  101,    2, 0x08 /* Private */,
+      13,    2,  102,    2, 0x08 /* Private */,
+      14,    0,  107,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    2,
+    QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void, QMetaType::QString,    2,
 
@@ -81,6 +98,10 @@ static const uint qt_meta_data_chat[] = {
     QMetaType::Void, QMetaType::QString,    2,
     QMetaType::Void,
     QMetaType::Void, QMetaType::QString,    2,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::LongLong, QMetaType::LongLong,    2,    2,
     QMetaType::Void,
 
        0        // eod
@@ -95,10 +116,16 @@ void chat::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
         case 0: _t->exit(); break;
         case 1: _t->send_msg((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 2: _t->update_chat_name((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 3: _t->ready_chat((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 4: _t->on_exit_btn_clicked(); break;
-        case 5: _t->chat_ing((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 6: _t->on_send_btn_clicked(); break;
+        case 3: _t->send_file_name((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 4: _t->send_file((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 5: _t->ready_chat((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 6: _t->on_exit_btn_clicked(); break;
+        case 7: _t->chat_ing((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 8: _t->on_send_btn_clicked(); break;
+        case 9: _t->on_open_file_btn_clicked(); break;
+        case 10: _t->on_send_file_btn_clicked(); break;
+        case 11: _t->updClintProgress((*reinterpret_cast< qint64(*)>(_a[1])),(*reinterpret_cast< qint64(*)>(_a[2]))); break;
+        case 12: _t->open_fail(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -122,6 +149,20 @@ void chat::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void *
             typedef void (chat::*_t)(QString );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&chat::update_chat_name)) {
                 *result = 2;
+                return;
+            }
+        }
+        {
+            typedef void (chat::*_t)(QString );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&chat::send_file_name)) {
+                *result = 3;
+                return;
+            }
+        }
+        {
+            typedef void (chat::*_t)(QString );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&chat::send_file)) {
+                *result = 4;
                 return;
             }
         }
@@ -153,13 +194,13 @@ int chat::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 13)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 13;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 13)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 13;
     }
     return _id;
 }
@@ -182,6 +223,20 @@ void chat::update_chat_name(QString _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 2, _a);
+}
+
+// SIGNAL 3
+void chat::send_file_name(QString _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 3, _a);
+}
+
+// SIGNAL 4
+void chat::send_file(QString _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 4, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

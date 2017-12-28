@@ -3,6 +3,19 @@
 #include <QtNetwork/QSctpSocket>
 #include <QTextStream>
 #include <QMessageBox>
+#include <QFile>
+/*  file header file  */
+#include <QFileDialog>
+#include <QTcpServer>
+#include <QDebug>
+#include "QObject"
+#include <QTcpSocket>
+#include <QUdpSocket>
+#include <QNetworkInterface>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <qtcpserver.h>
 
 login::login(QWidget *parent) :
     QWidget(parent),
@@ -34,6 +47,13 @@ login::login(QWidget *parent) :
     /*  show friend  */
     connect(wechat_view, SIGNAL(update_friend_list()), this, SLOT(friend_list_update()));
     connect(this, SIGNAL(show_flist(QString)), wechat_view, SLOT(flist_show(QString)));
+
+    /*  send file  */
+    connect(chat_view, SIGNAL(send_file_name(QString)), this, SLOT(update_file_name(QString)));
+    connect(chat_view, SIGNAL(send_file(QString)), this, SLOT(sendMsg()));
+    connect(this, SIGNAL(not_open_file()), chat_view, SLOT(open_fail()));
+//    connect(this, SIGNAL(bytes_info(qint64)), this, SLOT(update_pro_singal(qint64)));
+    connect(this, SIGNAL(update_pro_para(qint64,qint64)), chat_view, SLOT(updClintProgress(qint64, qint64)));
 }
 
 login::~login()
@@ -177,3 +197,71 @@ void login::friend_list_update(){
     msg_final = QB_info.data();
     client->write(msg_final);
 }
+
+void login::sendMsg(){  //send file
+    qDebug() << "--- send file begin ---";
+    emit sendfile_begin();  //set send btn false  todo
+    connect(client, SIGNAL(bytesWritten(qint64)), this, SLOT(update_pro_singal(qint64)));
+    locFile = new QFile(fileName);
+    if(!locFile->open((QFile::ReadOnly))){
+        emit not_open_file();
+        return;
+    }
+    totalBytes = locFile->size();
+    qDebug() << "filetotalbytes:" << totalBytes;
+    QDataStream sendOut(&outBlock, QIODevice::WriteOnly);
+    sendOut.setVersion(QDataStream::Qt_5_8);
+    //time.start();
+    QString curFile = fileName.right(fileName.size() - fileName.lastIndexOf('/') - 1);
+    qDebug() << "curFile: " << curFile;
+
+    char* file_send_pre;
+    QString final_msg = "send,";
+    final_msg += cur_chat_name;
+    final_msg += ",";
+    final_msg += my_name;
+    final_msg += ",";
+    final_msg += curFile;
+    QByteArray QB_info = final_msg.toLatin1();
+    file_send_pre = QB_info.data();
+    client->write(file_send_pre);
+
+    sendOut << qint64(0) << qint64(0) << curFile;
+    totalBytes += outBlock.size();  //file name size + real size
+    sendOut.device()->seek(0);
+    sendOut << totalBytes << qint64((outBlock.size() - sizeof(qint64)*2));
+    tobeWriteBytes = totalBytes - client->write(outBlock);  //send data in buffer
+    client->waitForBytesWritten();
+    qDebug() << "tobeWriteBytes:" << tobeWriteBytes;
+    qDebug() << "outBlock:" << outBlock;
+    outBlock.resize(0);
+}
+
+
+void login::update_file_name(QString fname){
+    fileName = fname;
+    qDebug() << "receive filename is " << fname;
+}
+
+void login::update_pro_singal(qint64 bytenum){
+    qDebug() << "update progress";
+    if(tobeWriteBytes > 0){  //没发送完
+        outBlock = locFile->read(qMin(tobeWriteBytes, payloadSize));//每次最多发送64k大小。
+        tobeWriteBytes -= (int)client->write(outBlock);
+        writeBytes += (totalBytes - tobeWriteBytes);//已经发送了的。
+        outBlock.resize(0);
+    }else {
+        locFile->close();
+    }
+    emit update_pro_para(totalBytes, writeBytes);
+
+
+    qDebug() << "writeBytes:"<< writeBytes;
+    qDebug() << "totalBytes:" << totalBytes;
+
+    if(writeBytes == totalBytes){
+        locFile->close();
+    }
+}
+
+

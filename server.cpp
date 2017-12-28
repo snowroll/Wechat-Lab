@@ -15,7 +15,7 @@
 using namespace std;
 
 
-#define BUFFSIZE 500
+#define BUFFSIZE 1024
 #define PORT 8001
 
 
@@ -267,6 +267,39 @@ void *run(void *arg){  //thread execute function
 			write(connect_fd, list, strlen(list));
 			printf("friend is %s  length is %d \n", list, len);
 			if(list) delete [] list;  
+		}
+		
+		/*  文件接受  */
+		if((memcmp("file", recbuf, 4)) == 0){
+			int i = 0;
+			char send_name[500];
+			char receive_name[500];
+			char back_data[1024];
+			strcpy(back_data, recbuf);
+			char file_name[1024];  //数据量可以改
+			char* substr = strtok(recbuf, seg);
+			while(substr != NULL){
+				if(i == 0)
+					strcpy(unuse_char, substr);
+				if(i == 1){
+					strcpy(receive_name, substr);
+				}
+				if(i == 2){
+					strcpy(send_name, substr);  
+				}
+				if(i == 3){
+					strcpy(file_name, substr);
+				}
+				i++;
+				substr = strtok(NULL, seg);
+			}
+			int chat_fd = dict.get(receive_name);
+			printf("find another fd is %d\n", chat_fd);
+			write(chat_fd, back_data, sizeof(recbuf));
+			printf("send file is %s", file_name);
+			while(0){
+				//todo 接受文件
+			}
 		}
 		
 		/*    关闭连接    */

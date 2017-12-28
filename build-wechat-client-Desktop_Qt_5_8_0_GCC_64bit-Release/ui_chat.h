@@ -15,6 +15,7 @@
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTextBrowser>
 #include <QtWidgets/QTextEdit>
@@ -30,6 +31,9 @@ public:
     QPushButton *send_btn;
     QPushButton *exit_btn;
     QLabel *friend_name;
+    QPushButton *send_file_btn;
+    QPushButton *open_file_btn;
+    QProgressBar *progress_bar;
 
     void setupUi(QWidget *chat)
     {
@@ -51,6 +55,16 @@ public:
         friend_name = new QLabel(chat);
         friend_name->setObjectName(QStringLiteral("friend_name"));
         friend_name->setGeometry(QRect(30, 10, 67, 17));
+        send_file_btn = new QPushButton(chat);
+        send_file_btn->setObjectName(QStringLiteral("send_file_btn"));
+        send_file_btn->setGeometry(QRect(320, 140, 81, 25));
+        open_file_btn = new QPushButton(chat);
+        open_file_btn->setObjectName(QStringLiteral("open_file_btn"));
+        open_file_btn->setGeometry(QRect(320, 100, 81, 25));
+        progress_bar = new QProgressBar(chat);
+        progress_bar->setObjectName(QStringLiteral("progress_bar"));
+        progress_bar->setGeometry(QRect(320, 180, 81, 23));
+        progress_bar->setValue(24);
 
         retranslateUi(chat);
 
@@ -63,6 +77,8 @@ public:
         send_btn->setText(QApplication::translate("chat", "send", Q_NULLPTR));
         exit_btn->setText(QApplication::translate("chat", "exit", Q_NULLPTR));
         friend_name->setText(QApplication::translate("chat", "friends", Q_NULLPTR));
+        send_file_btn->setText(QApplication::translate("chat", "send file", Q_NULLPTR));
+        open_file_btn->setText(QApplication::translate("chat", "open file", Q_NULLPTR));
     } // retranslateUi
 
 };
