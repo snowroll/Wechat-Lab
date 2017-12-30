@@ -79,7 +79,7 @@ void chat::on_open_file_btn_clicked()
 void chat::on_send_file_btn_clicked()
 {
     emit send_file(fileName);
-    ui->send_btn->setEnabled(false);
+    ui->send_file_btn->setEnabled(false);
 }
 
 void chat::updClintProgress(qint64 totalBytes, qint64 writeBytes){
@@ -94,4 +94,15 @@ void chat::updClintProgress(qint64 totalBytes, qint64 writeBytes){
 
 void chat::open_fail(){
     QMessageBox::information(this, "error", "file open failed");
+}
+
+void chat::file_ing(QString msg){
+    this->show();
+    QStringList lst;
+    lst = msg.split(QRegExp("[,]"));  // send  receive_name send_name msg
+    emit update_chat_name(lst[2]);
+    ui->friend_name->setText(lst[2]);
+    QString show_msg = lst[3] + "\n";
+    ui->chat_msg->insertPlainText(show_msg);
+    ui->chat_msg->moveCursor(QTextCursor::End);
 }

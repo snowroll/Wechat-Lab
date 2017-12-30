@@ -22,10 +22,15 @@ login::login(QWidget *parent) :
     ui(new Ui::login)
 {
     ui->setupUi(this);
+    ui->pass_edit->setEchoMode(QLineEdit::Password);
     client = new QTcpSocket(this);
     wechat_view = new wechat_client();
     chat_view = new chat();
     client->connectToHost(QHostAddress("127.0.0.1"), 8001);
+
+    /*  init  */
+    totalBytes = 0; recevBytes = 0; fileNameSize = 0;
+
     connect(client, SIGNAL(readyRead()), this, SLOT(readMessage()));//当有消息接受时会触发接收
     connect(this, SIGNAL(login_success()), wechat_view, SLOT(receivelogin()));
     connect(wechat_view, SIGNAL(update_list()), this, SLOT(receiveupdate()));  //update give to soket then send to server
@@ -52,8 +57,12 @@ login::login(QWidget *parent) :
     connect(chat_view, SIGNAL(send_file_name(QString)), this, SLOT(update_file_name(QString)));
     connect(chat_view, SIGNAL(send_file(QString)), this, SLOT(sendMsg()));
     connect(this, SIGNAL(not_open_file()), chat_view, SLOT(open_fail()));
-//    connect(this, SIGNAL(bytes_info(qint64)), this, SLOT(update_pro_singal(qint64)));
     connect(this, SIGNAL(update_pro_para(qint64,qint64)), chat_view, SLOT(updClintProgress(qint64, qint64)));
+
+    /*  rec file  */
+    connect(this, SIGNAL(receive_file(QString)), chat_view, SLOT(file_ing(QString)));
+    connect(this, SIGNAL(rec_file()), this, SLOT(readMsg()));
+
 }
 
 login::~login()
@@ -138,13 +147,18 @@ void login::readMessage()
     if(tag == "send"){
         emit receive_msg(msg);
     }
+    else if(tag == "file"){
+        emit receive_file(msg);
+    }
 
     /*   show flist    */
     tag = msg.mid(0, 5);
     if(tag == "flist"){
-
         emit show_flist(msg);
     }
+
+    /*  file buffer  */
+    emit rec_file();
 
     cout << msg << endl;
 }
@@ -200,23 +214,22 @@ void login::friend_list_update(){
 
 void login::sendMsg(){  //send file
     qDebug() << "--- send file begin ---";
-    emit sendfile_begin();  //set send btn false  todo
     connect(client, SIGNAL(bytesWritten(qint64)), this, SLOT(update_pro_singal(qint64)));
     locFile = new QFile(fileName);
     if(!locFile->open((QFile::ReadOnly))){
         emit not_open_file();
         return;
     }
-    totalBytes = locFile->size();
+    totalBytes = locFile->size();  //file tatal size()
     qDebug() << "filetotalbytes:" << totalBytes;
-    QDataStream sendOut(&outBlock, QIODevice::WriteOnly);
-    sendOut.setVersion(QDataStream::Qt_5_8);
-    //time.start();
+
     QString curFile = fileName.right(fileName.size() - fileName.lastIndexOf('/') - 1);
     qDebug() << "curFile: " << curFile;
 
+
+    /*  send file pre in order to receive*/
     char* file_send_pre;
-    QString final_msg = "send,";
+    QString final_msg = "file,";
     final_msg += cur_chat_name;
     final_msg += ",";
     final_msg += my_name;
@@ -225,6 +238,11 @@ void login::sendMsg(){  //send file
     QByteArray QB_info = final_msg.toLatin1();
     file_send_pre = QB_info.data();
     client->write(file_send_pre);
+
+    QDataStream sendOut(&outBlock, QIODevice::WriteOnly);
+    sendOut.setVersion(QDataStream::Qt_4_7);
+    //time.start();
+
 
     sendOut << qint64(0) << qint64(0) << curFile;
     totalBytes += outBlock.size();  //file name size + real size
@@ -246,6 +264,7 @@ void login::update_file_name(QString fname){
 void login::update_pro_singal(qint64 bytenum){
     qDebug() << "update progress";
     if(tobeWriteBytes > 0){  //没发送完
+        qDebug() << "not send complete";
         outBlock = locFile->read(qMin(tobeWriteBytes, payloadSize));//每次最多发送64k大小。
         tobeWriteBytes -= (int)client->write(outBlock);
         writeBytes += (totalBytes - tobeWriteBytes);//已经发送了的。
@@ -261,7 +280,74 @@ void login::update_pro_singal(qint64 bytenum){
 
     if(writeBytes == totalBytes){
         locFile->close();
+        qDebug() << "file send end";
     }
 }
 
+void login::readMsg(){
+    qDebug() << "-----------readMsg start-----------";
+    QDataStream in(client);
+    in.setVersion(QDataStream::Qt_4_7);
 
+    //float useTime = Time.elapsed();
+    if(recevBytes <= sizeof(qint64)*2){
+        if((client->bytesAvailable() >= sizeof(qint64)*2) && fileNameSize == 0){
+            //接收数据总大小信息和数据文件名大小。
+            in >> totalBytes >> fileNameSize;
+            qDebug() << "totalBytes:" << totalBytes;
+            qDebug() << "fileNameSize:" << fileNameSize;
+            recevBytes += sizeof(qint64)*2;
+            qDebug() << "1recevBytes:" << recevBytes;
+        }
+        if((client->bytesAvailable() >= fileNameSize) && (fileNameSize != 0)){
+            //开始接收文件，并建立文件。
+            in >> fileName;
+            qDebug() << "FileName:" << fileName;
+            recevBytes += fileNameSize;
+            qDebug() << "2recevBytes:" << recevBytes;
+            if(!locFile->open(QFile::WriteOnly)){
+                QMessageBox::warning(this,tr("应用程序"),tr("无法读取文件%1: \n%2").arg(fileName).arg(locFile->errorString()));
+                return;
+            }
+        }else{
+            return;
+        }
+    }
+
+    qDebug() << "-----------BytesArray write newFile of start-----------";
+    if(recevBytes < totalBytes){
+        recevBytes += client->bytesAvailable();        //把缓存区的内容写入文件。
+        inBlock = client->readAll();
+        locFile->write(inBlock);
+        inBlock.resize(0);                             //清空缓存区
+    }
+    /* set bar later */
+   // ui->progressBar->setMaximum(totalBytes);
+   // ui->progressBar->setValue(recevBytes);//设置进度条的进度
+    qDebug() << "recevBytes:" << recevBytes;
+    qDebug() << "totalBytes:" << totalBytes;
+    if(recevBytes == totalBytes){
+        locFile->close();
+        //cClint->close();
+       // ui->label->setText(tr("接收文件 %1完毕 ").arg(FileName));
+    }
+}
+
+void login::hasPendingFile(QString fileName){
+    int btn = QMessageBox::information(this, tr("receive file"), tr("file receive").arg(fileName),
+                                       QMessageBox::Yes,QMessageBox::No);
+   if(btn == QMessageBox::Yes){
+       QString name = QFileDialog::getSaveFileName(0,tr("保存文件"),fileName);
+       if(!name.isEmpty()){
+           //Dialog *clint = new Dialog(this);
+           //setFileName(name);
+           update_file_name(name);
+           //setHostaddr(QHostAddress(serAddress));//默认一台电脑用。
+       }
+   }
+   else{
+//      SendRefuse(refuse);
+//       sleep(2);
+//       on_cClosebtn_clicked();
+   }
+}

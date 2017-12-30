@@ -23,6 +23,7 @@ signals:
     void send_file_name(QString);
     void send_file(QString);
 
+
    // void sendFileName(QString);
 
 private slots:
@@ -37,6 +38,8 @@ private slots:
     void on_send_file_btn_clicked();
     void updClintProgress(qint64, qint64);  //update progress
     void open_fail();
+
+    void file_ing(QString);
 
 private:
     Ui::chat *ui;

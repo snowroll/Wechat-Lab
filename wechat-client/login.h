@@ -30,16 +30,21 @@ signals:
     void login_success();
     void update_data(QString);
     void receive_msg(QString);
+    void receive_file(QString);
     void add_res(QString);
     void show_flist(QString);
-    //void bytesWritten_1(qint64);
-    void sendfile_begin();
+
     void not_open_file();
     void update_pro_para(qint64, qint64);
+    /* file receive */
+    void rec_file();
+
 
 protected:
     /*  file send  */
     void SendFileName(QString fileName);  //not realize
+
+    void hasPendingFile(QString fileName);
 
 private slots:
     void on_login_btn_clicked();
@@ -57,6 +62,12 @@ private slots:
     void sendMsg();
     void update_file_name(QString);
     void update_pro_singal(qint64);
+
+    /*  file receive */
+    void readMsg();
+   // void processPendingDatarams();
+
+
 
 private:
     Ui::login *ui;
@@ -76,9 +87,13 @@ private:
     qint64 writeBytes;
     qint64 tobeWriteBytes;
     qint64 payloadSize;  //be init first varible
+    qint64 recevBytes;  //receive file bytes
+    qint64 fileNameSize;  //receive file name size
 
     QString fileName;
     QByteArray outBlock;
+    QByteArray inBlock;
+
 
 };
 

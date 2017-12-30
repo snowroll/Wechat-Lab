@@ -20,6 +20,8 @@ using namespace std;
 
 
 Dict dict;
+static int cur_chat_person;
+static bool send_file = false;
 void *run(void *arg);  //thread execute function
 	
 int main(){
@@ -271,6 +273,7 @@ void *run(void *arg){  //thread execute function
 		
 		/*  文件接受  */
 		if((memcmp("file", recbuf, 4)) == 0){
+			send_file = true;
 			int i = 0;
 			char send_name[500];
 			char receive_name[500];
@@ -294,13 +297,55 @@ void *run(void *arg){  //thread execute function
 				substr = strtok(NULL, seg);
 			}
 			int chat_fd = dict.get(receive_name);
+			cur_chat_person = chat_fd;
 			printf("find another fd is %d\n", chat_fd);
+			printf("why after write no signal \n");
 			write(chat_fd, back_data, sizeof(recbuf));
-			printf("send file is %s", file_name);
-			while(0){
+			/*printf("send file is %s", file_name);
+			
+			bzero(recbuf,sizeof(recbuf));
+			rec_n = recv(connect_fd, recbuf, BUFFSIZE, 0);
+			while((memcmp("eof", recbuf, 3)) != 0){
+				printf("I'm here");
+				write(chat_fd, recbuf, sizeof(recbuf));
+				bzero(recbuf,sizeof(recbuf));
+				rec_n = recv(connect_fd, recbuf, BUFFSIZE, 0);
 				//todo 接受文件
 			}
+			recbuf[rec_n] = '\0';
+			write(chat_fd, recbuf, sizeof(recbuf));
+			printf("#: %s\n", recbuf);*/
+			
 		}
+		if(send_file){
+			write(cur_chat_person, recbuf, sizeof(recbuf));
+		}
+		/*if((memcmp("eof", recbuf, 3)) == 0){
+			int i = 0;
+			char send_name[500];
+			char receive_name[500];
+			char back_data[1024];
+			strcpy(back_data, recbuf);
+			char file_name[1024];  //数据量可以改
+			char* substr = strtok(recbuf, seg);
+			while(substr != NULL){
+				if(i == 0)
+					strcpy(unuse_char, substr);
+				if(i == 1){
+					strcpy(receive_name, substr);
+				}
+				if(i == 2){
+					strcpy(send_name, substr);  
+				}
+				if(i == 3){
+					strcpy(file_name, substr);
+				}
+				i++;
+				substr = strtok(NULL, seg);
+			}
+			int chat_fd = dict.get(receive_name);
+		*/
+			
 		
 		/*    关闭连接    */
 		if(rec_n == 0){
